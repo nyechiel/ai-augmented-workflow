@@ -1,0 +1,55 @@
+{
+  "apps": [
+    {
+      "id": "crux",
+      "name": "Crux",
+      "description": "Task management with kanban board",
+      "tags": ["work"],
+      "url": "http://localhost:8487",
+      "autostart": true,
+      "services": [
+        {
+          "name": "server",
+          "directory": "/home/YOUR_USERNAME/Projects/ai-augmented-workflow/crux",
+          "command": "crux web --port 8487",
+          "port": 8487
+        }
+      ]
+    },
+    {
+      "id": "mcp-stack",
+      "name": "MCP Stack",
+      "description": "Claude Code MCP servers (GWS, Slack, Contacts, Time) behind mcp-proxy",
+      "tags": ["work"],
+      "url": "http://localhost:9090",
+      "autostart": true,
+      "type": "compose",
+      "compose": {
+        "file": "/home/YOUR_USERNAME/Projects/ai-augmented-workflow/local-mcp-stack/docker-compose.yml",
+        "env_file": "/home/YOUR_USERNAME/Projects/ai-augmented-workflow/mcp-secrets.env"
+      },
+      "services": [
+        {
+          "name": "google-workspace",
+          "port": 8001
+        },
+        {
+          "name": "slack",
+          "port": 13070
+        },
+        {
+          "name": "google-contacts",
+          "port": 8082
+        },
+        {
+          "name": "time",
+          "port": 8086
+        },
+        {
+          "name": "mcp-proxy",
+          "port": 9090
+        }
+      ]
+    }
+  ]
+}

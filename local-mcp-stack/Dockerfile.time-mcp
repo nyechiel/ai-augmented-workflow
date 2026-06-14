@@ -1,0 +1,23 @@
+FROM python:3.12-slim
+
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir "mcp[cli]" pytz uvicorn "starlette>=1.0.1"
+
+WORKDIR /app
+COPY time-mcp-server.py .
+
+RUN useradd --create-home --shell /bin/bash app && \
+    chown -R app:app /app
+
+USER app
+
+ENV TZ=UTC
+ENV MCP_HOST=0.0.0.0
+ENV MCP_PORT=8086
+
+EXPOSE 8086
+
+CMD ["python3", "time-mcp-server.py"]

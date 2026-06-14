@@ -1,0 +1,91 @@
+{
+  "mcpProxy": {
+    "addr": ":9090",
+    "name": "AI Workflow MCP Gateway",
+    "version": "1.0.0",
+    "type": "sse",
+    "options": {
+      "logEnabled": true
+    }
+  },
+  "mcpServers": {
+    "google-workspace": {
+      "url": "http://google-workspace-mcp:8000/mcp",
+      "transportType": "streamable-http",
+      "options": {
+        "toolFilter": {
+          "mode": "allow",
+          "list": [
+            "search_gmail_messages",
+            "get_gmail_message_content",
+            "get_gmail_messages_content_batch",
+            "get_gmail_thread_content",
+            "modify_gmail_message_labels",
+            "get_events",
+            "list_calendars",
+            "search_drive_files",
+            "get_doc_content",
+            "get_doc_as_markdown",
+            "search_docs",
+            "get_spreadsheet_info",
+            "read_sheet_values",
+            "get_presentation",
+            "get_page",
+            "get_page_thumbnail"
+          ]
+        }
+      }
+    },
+    "slack": {
+      "url": "http://slack-mcp:13070/mcp",
+      "transportType": "streamable-http",
+      "options": {
+        "toolFilter": {
+          "mode": "allow",
+          "list": [
+            "conversations_history",
+            "conversations_replies",
+            "conversations_search_messages",
+            "conversations_unreads",
+            "conversations_mark",
+            "channels_list",
+            "users_search",
+            "saved_list",
+            "saved_update",
+            "saved_clear_completed",
+            "activity_unreads",
+            "activity_mark_read",
+            "usergroups_list",
+            "usergroups_me"
+          ]
+        }
+      }
+    },
+    "google-contacts": {
+      "url": "http://google-contacts-mcp:8080/mcp",
+      "transportType": "streamable-http",
+      "options": {
+        "toolFilter": {
+          "mode": "allow",
+          "list": [
+            "search_directory",
+            "search_contacts",
+            "list_workspace_users"
+          ]
+        }
+      }
+    },
+    "time": {
+      "url": "http://time-mcp:8086/mcp",
+      "transportType": "streamable-http",
+      "options": {
+        "toolFilter": {
+          "mode": "allow",
+          "list": [
+            "get_current_time"
+          ]
+        }
+      }
+    }
+  }
+}

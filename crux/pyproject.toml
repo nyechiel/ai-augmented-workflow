@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crux"
+version = "0.1.0"
+description = "Personal task manager with CLI and web UI"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "fastapi>=0.100",
+    "uvicorn>=0.20",
+    "sqlalchemy>=2.0",
+    "mcp>=1.0",
+]
+
+[project.scripts]
+crux = "crux.cli.commands:cli"
+crux-mcp = "crux.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"crux.web" = ["static/*"]

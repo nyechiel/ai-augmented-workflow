@@ -1,0 +1,164 @@
+services:
+  # Google Workspace MCP
+  # Gmail, Drive, Calendar, Docs, Sheets, Slides
+  # Source: https://github.com/nyechiel/google_workspace_mcp (branch: patches-for-upstream)
+  google-workspace:
+    build:
+      # CUSTOMIZE: path to your google_workspace_mcp clone
+      context: ../../google_workspace_mcp
+    container_name: google-workspace-mcp
+    restart: always
+    mem_limit: 512m
+    ports:
+      - "127.0.0.1:8001:8000"
+    env_file:
+      - ../mcp-secrets.env
+    environment:
+      - GOOGLE_OAUTH_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_OAUTH_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REFRESH_TOKEN=${GOOGLE_REFRESH_TOKEN}
+      - USER_GOOGLE_EMAIL=${USER_GOOGLE_EMAIL}
+      - OAUTHLIB_INSECURE_TRANSPORT=1  # Required for local HTTP inside the container; external OAuth traffic still uses HTTPS
+      - PORT=8000
+      - TOOL_TIER=extended
+    volumes:
+      - workspace-uv-cache:/root/.cache/uv
+      - workspace-config:/root/.config
+      # Note: :Z,U flags are for Podman (SELinux + user namespace). Docker users: remove :Z,U
+      - ${HOME}/.google_workspace_mcp:/home/app/.google_workspace_mcp:Z,U
+    networks:
+      - mcp-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Slack MCP
+  # Channels, messages, unreads, saved items
+  # Source: https://github.com/nyechiel/slack-mcp-server (branch: feat/activity-and-saved-tools)
+  # Upstream: https://github.com/korotovsky/slack-mcp-server
+  slack:
+    build:
+      # CUSTOMIZE: path to your slack-mcp-server clone
+      context: ../../slack-mcp-server
+    container_name: slack-mcp
+    restart: always
+    mem_limit: 512m
+    ports:
+      - "127.0.0.1:13070:13070"
+    env_file:
+      - ../mcp-secrets.env
+    environment:
+      - SLACK_MCP_XOXC_TOKEN=${SLACK_MCP_XOXC_TOKEN}
+      - SLACK_MCP_XOXD_TOKEN=${SLACK_MCP_XOXD_TOKEN}
+      - SLACK_MCP_USER_AGENT=${SLACK_MCP_USER_AGENT}
+      - SLACK_MCP_CUSTOM_TLS=${SLACK_MCP_CUSTOM_TLS:-1}
+      - SLACK_MCP_PORT=13070
+      - SLACK_MCP_HOST=0.0.0.0
+      - SLACK_MCP_MARK_TOOL=true
+    command: ["--transport", "http"]
+    networks:
+      - mcp-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -so /dev/null -w '%{http_code}' --max-time 5 http://localhost:13070/mcp | grep -q 200"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Google Contacts MCP
+  # Directory search, contacts lookup
+  # Source: https://github.com/nyechiel/mcp-google-contacts-server
+  google-contacts:
+    build:
+      # CUSTOMIZE: path to your mcp-google-contacts-server clone.
+      # Copy Dockerfile.google-contacts into the clone first (see SETUP.md step 3.1).
+      context: ../../mcp-google-contacts-server
+    container_name: google-contacts-mcp
+    restart: always
+    mem_limit: 512m
+    ports:
+      - "127.0.0.1:8082:8080"
+    env_file:
+      - ../mcp-secrets.env
+    environment:
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REFRESH_TOKEN=${GOOGLE_REFRESH_TOKEN}
+      - USER_GOOGLE_EMAIL=${USER_GOOGLE_EMAIL}
+      - OAUTHLIB_INSECURE_TRANSPORT=1  # Required for local HTTP inside the container; external OAuth traffic still uses HTTPS
+    volumes:
+      - google-contacts-uv-cache:/home/app/.cache/uv
+      # Note: :Z,U flags are for Podman (SELinux + user namespace). Docker users: remove :Z,U
+      - ${HOME}/.config/google-contacts-mcp:/home/app/.config/google-contacts-mcp:Z,U
+    networks:
+      - mcp-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf -X POST -H 'Content-Type: application/json' -H 'Accept: application/json, text/event-stream' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2024-11-05\",\"capabilities\":{},\"clientInfo\":{\"name\":\"healthcheck\",\"version\":\"1.0\"}}}' --max-time 5 http://localhost:8080/mcp | grep -q 'protocolVersion'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Time MCP
+  # Timezone-aware current time
+  time:
+    build:
+      context: .
+      dockerfile: Dockerfile.time-mcp
+    container_name: time-mcp
+    restart: always
+    mem_limit: 512m
+    ports:
+      - "127.0.0.1:8086:8086"
+    environment:
+      - TZ=${TZ:-UTC}
+    networks:
+      - mcp-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -so /dev/null -w '%{http_code}' --max-time 5 -H 'Accept: application/json, text/event-stream' http://localhost:8086/mcp/ | grep -qE '(200|406)'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MCP Proxy Gateway
+  # Aggregates all servers at a single endpoint with tool allowlists
+  # Source: https://github.com/TBXark/mcp-proxy
+  mcp-proxy:
+    image: ghcr.io/tbxark/mcp-proxy:latest
+    container_name: mcp-proxy
+    restart: always
+    mem_limit: 256m
+    ports:
+      - "127.0.0.1:9090:9090"
+    extra_hosts:
+      - "host.containers.internal:host-gateway"
+    volumes:
+      - ./mcp-proxy-config.json:/config/config.json:ro,Z
+    networks:
+      - mcp-network
+    depends_on:
+      google-workspace:
+        condition: service_healthy
+      slack:
+        condition: service_healthy
+      google-contacts:
+        condition: service_healthy
+      time:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/9090 || exit 1; exec 3>&-'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  workspace-uv-cache:
+    driver: local
+  workspace-config:
+    driver: local
+  google-contacts-uv-cache:
+    driver: local
+
+networks:
+  mcp-network:
+    driver: bridge

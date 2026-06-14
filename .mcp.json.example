@@ -1,0 +1,25 @@
+{
+  "_comment": "Copy this file to .mcp.json in your project root. These entries tell Claude Code how to connect to your MCP servers. SSE entries connect through the mcp-proxy gateway; stdio entries run as local processes.",
+  "mcpServers": {
+    "crux": {
+      "command": "crux-mcp",
+      "args": []
+    },
+    "time": {
+      "type": "sse",
+      "url": "http://localhost:9090/time/sse"
+    },
+    "slack": {
+      "type": "sse",
+      "url": "http://localhost:9090/slack/sse"
+    },
+    "google-workspace": {
+      "type": "sse",
+      "url": "http://localhost:9090/google-workspace/sse"
+    },
+    "google-contacts": {
+      "type": "sse",
+      "url": "http://localhost:9090/google-contacts/sse"
+    }
+  }
+}
