@@ -403,7 +403,7 @@ def get_repo_git_info(repo: dict) -> dict:
         ["git", "-C", path, "symbolic-ref", "--short", "HEAD"],
         capture_output=True, text=True, timeout=5,
     )
-    branch = branch_result.stdout.strip() or "master"
+    branch = branch_result.stdout.strip() or "main"
 
     hash_result = subprocess.run(
         ["git", "-C", path, "log", "-1", "--format=%H %ci"],
