@@ -19,7 +19,7 @@
 - Outstanding from last time: {{list}}
 - Deferred topics now due: {{list}}
 
-## Relevant issue tracker Issues
+## Relevant issue tracker issues
 
 | Key | Summary | Status | Assignee | Updated |
 |-----|---------|--------|----------|---------|

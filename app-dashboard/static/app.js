@@ -6,6 +6,12 @@ let expandedApps = new Set();
 let draggedId = null;
 let justDragged = false;
 
+function escapeHtml(str) {
+  const d = document.createElement("div");
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 async function fetchApps() {
   const res = await fetch("/api/apps");
   if (!res.ok) throw new Error("Failed to fetch apps");
@@ -168,10 +174,10 @@ function buildCard(app) {
   const servicesHtml = app.services
     .map(
       (s) => `
-    <div class="service-row" data-service="${s.name}">
+    <div class="service-row" data-service="${escapeHtml(s.name)}">
       <span class="service-dot ${s.running ? "running" : "stopped"}"></span>
-      <span class="service-name">${s.name}</span>
-      <span class="service-port">:${s.port}</span>
+      <span class="service-name">${escapeHtml(s.name)}</span>
+      <span class="service-port">:${parseInt(s.port, 10) || 0}</span>
     </div>`
     )
     .join("");
@@ -188,19 +194,19 @@ function buildCard(app) {
     <div class="app-header" data-expand="${app.id}">
       <span class="drag-handle">&#x2630;</span>
       <span class="status-dot ${app.status}"></span>
-      <span class="app-name">${app.name}</span>
-      ${(app.tags || []).map((t) => `<span class="tag-badge">${t}</span>`).join("")}
+      <span class="app-name">${escapeHtml(app.name)}</span>
+      ${(app.tags || []).map((t) => `<span class="tag-badge">${escapeHtml(t)}</span>`).join("")}
       ${app.autostart ? '<span class="autostart-badge">auto-start</span>' : ""}
       <span class="expand-arrow">${isExpanded ? "&#9650;" : "&#9660;"}</span>
     </div>
     <div class="app-details ${isExpanded ? "expanded" : ""}">
-      <p class="app-desc">${app.description}</p>
+      <p class="app-desc">${escapeHtml(app.description)}</p>
       <div class="services">${servicesHtml}</div>
       <div class="actions">
         <button class="btn btn-start" ${isRunning ? "disabled" : ""} data-action="start">Start</button>
         <button class="btn btn-stop" ${isStopped ? "disabled" : ""} data-action="stop">Stop</button>
         <button class="btn btn-restart" ${isStopped ? "disabled" : ""} data-action="restart">Restart</button>
-        <a class="btn btn-open" href="${app.url}" target="_blank" ${!isRunning ? 'style="pointer-events:none;opacity:0.4" tabindex="-1" aria-disabled="true"' : ""}>Open</a>
+        <a class="btn btn-open" href="${escapeHtml(app.url)}" target="_blank" ${!isRunning ? 'style="pointer-events:none;opacity:0.4" tabindex="-1" aria-disabled="true"' : ""}>Open</a>
         ${logButtonHtml}
         <button class="btn btn-autostart ${app.autostart ? "active" : ""}" data-autostart="${app.id}">${app.autostart ? "Disable Auto-start" : "Enable Auto-start"}</button>
       </div>
@@ -454,14 +460,14 @@ function buildBackupCard(data) {
       const dotClass = repoDotClass(r.last_push_result);
       const statusText = repoStatusText(r);
       const linkHtml = r.commit_url
-        ? `<a class="repo-link" href="${r.commit_url}" target="_blank">Remote &#x2197;</a>`
+        ? `<a class="repo-link" href="${escapeHtml(r.commit_url)}" target="_blank">Remote &#x2197;</a>`
         : "";
       const aheadHtml =
-        r.ahead > 0 ? `<span class="repo-ahead">${r.ahead} ahead</span>` : "";
+        r.ahead > 0 ? `<span class="repo-ahead">${parseInt(r.ahead, 10)} ahead</span>` : "";
       return `<div class="repo-row">
         <span class="repo-dot ${dotClass}"></span>
-        <span class="repo-name">${r.name}</span>
-        <span class="repo-status">${statusText}</span>
+        <span class="repo-name">${escapeHtml(r.name)}</span>
+        <span class="repo-status">${escapeHtml(statusText)}</span>
         ${aheadHtml}
         ${linkHtml}
       </div>`;
@@ -470,7 +476,7 @@ function buildBackupCard(data) {
 
   const issuesHtml =
     data.issues.length > 0
-      ? `<div class="issue-banner warning">${data.issues.length} repo${data.issues.length > 1 ? "s" : ""} failed to push on last run</div>`
+      ? `<div class="issue-banner warning">${parseInt(data.issues.length, 10)} repo${data.issues.length > 1 ? "s" : ""} failed to push on last run</div>`
       : "";
 
   card.innerHTML = `
@@ -581,14 +587,14 @@ function updateBackupCard(card, data) {
         const dotClass = repoDotClass(r.last_push_result);
         const statusText = repoStatusText(r);
         const linkHtml = r.commit_url
-          ? `<a class="repo-link" href="${r.commit_url}" target="_blank">Remote &#x2197;</a>`
+          ? `<a class="repo-link" href="${escapeHtml(r.commit_url)}" target="_blank">Remote &#x2197;</a>`
           : "";
         const aheadHtml =
-          r.ahead > 0 ? `<span class="repo-ahead">${r.ahead} ahead</span>` : "";
+          r.ahead > 0 ? `<span class="repo-ahead">${parseInt(r.ahead, 10)} ahead</span>` : "";
         return `<div class="repo-row">
           <span class="repo-dot ${dotClass}"></span>
-          <span class="repo-name">${r.name}</span>
-          <span class="repo-status">${statusText}</span>
+          <span class="repo-name">${escapeHtml(r.name)}</span>
+          <span class="repo-status">${escapeHtml(statusText)}</span>
           ${aheadHtml}
           ${linkHtml}
         </div>`;
