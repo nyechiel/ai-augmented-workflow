@@ -29,9 +29,10 @@ Each memory file uses this structure:
 
 ```markdown
 ---
-name: user_profile
+name: user-profile
 description: Role, background, and team context
-type: user
+metadata:
+  type: user
 ---
 
 # User Profile

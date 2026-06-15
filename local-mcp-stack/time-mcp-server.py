@@ -24,6 +24,7 @@ def get_current_time(timezone: str = DEFAULT_TZ) -> str:
 
 
 if __name__ == "__main__":
+    # Disabled because the proxy connects via container hostname, not localhost
     security = TransportSecuritySettings(enable_dns_rebinding_protection=False)
 
     session_manager = StreamableHTTPSessionManager(

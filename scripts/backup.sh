@@ -25,6 +25,8 @@ else
 fi
 
 # 2. Copy Claude Code config
+# WARNING: credentials.json contains auth tokens. backups/ is gitignored but
+# never remove that gitignore entry or force-add this directory.
 mkdir -p "$WORKFLOW_REPO/backups/claude-config"
 cp "$HOME/.claude/settings.json" "$WORKFLOW_REPO/backups/claude-config/" 2>/dev/null || true
 cp "$HOME/.claude/.mcp.json" "$WORKFLOW_REPO/backups/claude-config/mcp-global.json" 2>/dev/null || true
