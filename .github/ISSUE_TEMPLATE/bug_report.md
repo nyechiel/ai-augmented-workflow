@@ -24,6 +24,7 @@ What you expected to happen.
 - Component: [e.g., Crux, App Dashboard, MCP stack, skill name]
 
 **Logs or error output**
+
 ```
 Paste relevant logs here
 ```

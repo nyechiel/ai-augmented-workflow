@@ -6,7 +6,7 @@ This project handles OAuth tokens, API keys, and connections to personal email a
 
 If you discover a security vulnerability, please report it privately:
 
-**Email:** n.yechiel@gmail.com
+**Email:** <n.yechiel@gmail.com>
 
 Please include:
 

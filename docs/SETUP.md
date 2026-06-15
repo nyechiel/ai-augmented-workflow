@@ -298,7 +298,6 @@ Run through this checklist:
 - [ ] Slack works (ask Claude to check unreads)
 - [ ] Time tool works (ask Claude for the current time)
 
-
 If any tool fails, check:
 
 1. Is the container running? (`podman ps` or `docker ps`)

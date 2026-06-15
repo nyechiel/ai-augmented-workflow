@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+    paths: ['**/*.md', '.markdownlint.json', '.mlc_config.json']
+  pull_request:
+    paths: ['**/*.md', '.markdownlint.json', '.mlc_config.json']
+
+jobs:
+  markdownlint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: '**/*.md'
+
+  link-check:
+    name: Link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          config-file: '.mlc_config.json'
+          use-quiet-mode: 'yes'
+          folder-path: '.'
