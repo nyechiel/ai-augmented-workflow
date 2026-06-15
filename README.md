@@ -161,10 +161,10 @@ Contributions are welcome - bug fixes, documentation improvements, new skill exa
 
 This project builds on ideas and tools from several people:
 
-- [Andrej Karpathy](https://karpathy.ai/) - His [LLM Wiki](https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285) concept (compiling raw data into structured, interlinked markdown rather than chunking it into vector embeddings) is the knowledge architecture pattern behind this workflow. His popular [CLAUDE.md file](https://github.com/karpathy/dotfiles) also helped establish structured project instructions as a best practice.
-- [Anthropic](https://www.anthropic.com/) - Claude Code, the [Model Context Protocol](https://modelcontextprotocol.io/), and the skills system that this entire architecture is built on.
+- [Andrej Karpathy](https://karpathy.ai/) - His [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) concept (compiling raw data into structured, interlinked markdown rather than chunking it into vector embeddings) is the knowledge architecture pattern behind this workflow. His observations on LLM coding pitfalls, [codified by the community](https://github.com/multica-ai/andrej-karpathy-skills), also helped establish structured project instructions as a best practice.
+- [Anthropic](https://www.anthropic.com/) - Claude Code, the skills system, and the original creators of the [Model Context Protocol](https://modelcontextprotocol.io/), now an open standard under the [Linux Foundation's Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation).
 - [TBXark](https://github.com/TBXark) - [mcp-proxy](https://github.com/TBXark/mcp-proxy), the gateway that makes tool allowlists possible - a key safety component.
-- [Boris Cherny](https://github.com/anthropics/claude-code/blob/main/.claude/CLAUDE.md) - His CLAUDE.md template was an early reference for structuring agent instructions.
+- [Boris Cherny](https://github.com/bcherny) - Creator of Claude Code. His [workflow tips](https://howborisusesclaudecode.com/) and approach to CLAUDE.md as a living team document were an early reference for structuring agent instructions.
 - [Jonathan Zarecki](https://github.com/jonzarecki) - His work on a similar AI-augmented workflow was a direct inspiration for this project.
 
 ## License
