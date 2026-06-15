@@ -71,10 +71,22 @@ Replace the path segments with your actual project path. Claude Code encodes the
 
 ## Getting Started
 
-Start with two files:
+Start with two files. Example templates are included - copy them and fill in your details:
+
+```bash
+cp user_profile.example.md user_profile.md
+cp user_writing_style.example.md user_writing_style.md
+```
 
 1. **`user_profile.md`** - Your role, team, company, focus areas, and key context the agent should always know
 2. **`user_writing_style.md`** - How you want the agent to write (tone, formatting preferences, things to avoid)
+
+Then add entries to `MEMORY.md`:
+
+```
+- [Your role and background](user_profile.md) - Your role, team, and focus areas
+- [Writing style](user_writing_style.md) - Tone, formatting, things to avoid
+```
 
 These two files alone make a dramatic difference in output quality. Add more as you go - every time you correct the agent on something that should be permanent, that's a candidate for a feedback memory.
 
