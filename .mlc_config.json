@@ -2,9 +2,10 @@
   "ignorePatterns": [
     { "pattern": "^http://localhost" },
     { "pattern": "YOUR_USERNAME" },
-    { "pattern": "YOUR_EMAIL" }
+    { "pattern": "YOUR_EMAIL" },
+    { "pattern": "^https://www.linkedin.com" }
   ],
-  "aliveStatusCodes": [200, 206, 301, 302, 403],
+  "aliveStatusCodes": [200, 206, 301, 302],
   "retryOn429": true,
   "retryCount": 2,
   "timeout": "10s"
