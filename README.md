@@ -4,10 +4,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform: Linux | macOS | WSL2](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL2-lightgrey.svg)](#platform-notes)
-[![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet.svg)](https://claude.ai/claude-code)
+[![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet.svg)](https://www.anthropic.com/claude-code)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
 
-A template you clone, customize, and make your own. Built on [Claude Code](https://claude.ai/claude-code) and [MCP](https://modelcontextprotocol.io/), but the architecture - skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent.
+A template you clone, customize, and make your own. Built on [Claude Code](https://www.anthropic.com/claude-code) and [MCP](https://modelcontextprotocol.io/), but the architecture - skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent.
 
 ## Table of contents
 
@@ -99,6 +99,8 @@ Each skill is a SKILL.md file with a tool allowlist and workflow steps. See [ski
 
 **Skills over prompts.** Instead of re-explaining workflows every session, skills encode them as reusable SKILL.md files with explicit tool allowlists and step-by-step instructions. The agent follows the skill; you review the output.
 
+**Harness over code.** The rules, tool allowlists, memory, and skills form a harness around the agent - guides that steer it before it acts, sensors that correct it after. The harness is the durable artifact; the agent's output is regenerable.
+
 <details>
 <summary><h2>Important considerations</h2></summary>
 
@@ -157,7 +159,7 @@ This workflow grew out of daily use over several months. The companion blog post
 
 ## Contributing
 
-Contributions are welcome - bug fixes, documentation improvements, new skill examples, and platform compatibility patches. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
+Contributions are welcome - bug fixes, documentation improvements, setup and platform compatibility patches. New skills belong in your fork (this is a template, not a shared library). See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
 
 ## Acknowledgments
 
