@@ -1,17 +1,16 @@
 # AI-Augmented Workflow
 
+**Give your AI agent full context about your work - email, calendar, chat, tasks, documents - and let it execute multi-step workflows on your behalf, with you as the approver.**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform: Linux | macOS | WSL2](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL2-lightgrey.svg)](#platform-notes)
 [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet.svg)](https://claude.ai/claude-code)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
 
-A template for building your own AI-powered knowledge worker workflow using [Claude Code](https://claude.ai/claude-code) and the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
-
-Built on Claude Code, but the architecture - MCP servers, skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent or coding assistant.
+A template you clone, customize, and make your own. Built on [Claude Code](https://claude.ai/claude-code) and [MCP](https://modelcontextprotocol.io/), but the architecture - skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent.
 
 ## Table of contents
 
-- [What this is](#what-this-is)
 - [What's included](#whats-included)
 - [Architecture](#architecture)
 - [Quick start](#quick-start)
@@ -24,12 +23,6 @@ Built on Claude Code, but the architecture - MCP servers, skills as markdown, me
 - [Contributing](#contributing)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-
-## What this is
-
-This repo gives you a working foundation for an AI-augmented workflow - one where an AI agent has full context about your work (email, calendar, chat, tasks, documents) and can execute multi-step workflows on your behalf, with you as the approver.
-
-It's not a framework or a library. It's a template you clone, customize, and make your own.
 
 ## What's included
 
@@ -106,7 +99,8 @@ Each skill is a SKILL.md file with a tool allowlist and workflow steps. See [ski
 
 **Skills over prompts.** Instead of re-explaining workflows every session, skills encode them as reusable SKILL.md files with explicit tool allowlists and step-by-step instructions. The agent follows the skill; you review the output.
 
-## Important considerations
+<details>
+<summary><h2>Important considerations</h2></summary>
 
 This system connects an AI agent to your real email, calendar, chat, and task management. While it's designed with safety boundaries (tool allowlists, read-only defaults, human-as-approver), you are responsible for understanding what access you're granting and reviewing what the agent does with it.
 
@@ -117,7 +111,10 @@ A few things to keep in mind:
 - **Enterprise environments have rules.** If you're connecting to corporate systems (work email, company Slack, internal trackers), check with your IT and security teams first. Many organizations have policies about third-party tool access, API token usage, data handling, and AI tool adoption that may apply.
 - **AI output requires judgment.** The agent can misread context, misattribute information, or produce plausible-sounding errors. The human-as-approver model exists because human review is not optional - it's the safety mechanism.
 
-## Adapting to your role
+</details>
+
+<details>
+<summary><h2>Adapting to your role</h2></summary>
 
 This template works for any knowledge worker role. What changes:
 
@@ -133,7 +130,10 @@ This template works for any knowledge worker role. What changes:
 
 See [docs/CUSTOMIZATION.md](docs/CUSTOMIZATION.md) for a detailed guide, and [workflow-guide.md](workflow-guide.md) for how the skills connect and a suggested daily rhythm.
 
-## Platform notes
+</details>
+
+<details>
+<summary><h2>Platform notes</h2></summary>
 
 This template is tuned for Linux (Fedora), but the core workflow (Claude Code, MCP servers, skills, memory) works on any platform. The OS-specific parts are the infrastructure layer:
 
@@ -145,6 +145,8 @@ This template is tuned for Linux (Fedora), but the core workflow (Claude Code, M
 | Shell scripts | bash (native) | bash (native) | WSL2 or Git Bash |
 
 If you're on macOS or Windows, swap the systemd service files for your platform's equivalent and use Docker instead of Podman. Everything else works as-is.
+
+</details>
 
 ## Further reading
 
