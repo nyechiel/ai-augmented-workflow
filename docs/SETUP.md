@@ -69,7 +69,7 @@ The MCP stack connects Claude Code to your external tools (email, calendar, chat
 
 ### 3.1 Clone the MCP servers
 
-Clone the MCP server repos you need. These forks include patches for containerized deployments (auth fixes, additional tools, etc.):
+Clone the MCP server repos you need. These are forks with patches needed for running in containers (auth flows, additional tools, startup fixes). Upstream PRs are pending - once merged, you can switch to the upstream repos directly.
 
 - **Google Workspace** (Gmail, Calendar, Drive, Docs, Sheets, Slides): [https://github.com/nyechiel/google_workspace_mcp](https://github.com/nyechiel/google_workspace_mcp)
 - **Slack**: [https://github.com/nyechiel/slack-mcp-server](https://github.com/nyechiel/slack-mcp-server)

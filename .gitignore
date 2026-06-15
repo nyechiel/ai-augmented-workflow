@@ -19,6 +19,7 @@ __pycache__/
 memory/*.md
 !memory/README.md
 !memory/MEMORY.md
+!memory/*.example.md
 
 # Personal working files
 meetings/
