@@ -16,7 +16,7 @@ A template you clone, customize, and make your own. Built on [Claude Code](https
 - [Quick start](#quick-start)
 - [Included skills](#included-skills)
 - [Key design decisions](#key-design-decisions)
-- [Important considerations](#important-considerations)
+- [Important considerations](#warning-important-considerations)
 - [Adapting to your role](#adapting-to-your-role)
 - [Platform notes](#platform-notes)
 - [Further reading](#further-reading)
