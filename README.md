@@ -101,8 +101,7 @@ Each skill is a SKILL.md file with a tool allowlist and workflow steps. See [ski
 
 **Harness over code.** The rules, tool allowlists, memory, and skills form a harness around the agent - guides that steer it before it acts, sensors that correct it after. The harness is the durable artifact; the agent's output is regenerable.
 
-<details>
-<summary><h2>Important considerations</h2></summary>
+## :warning: Important considerations
 
 This system connects an AI agent to your real email, calendar, chat, and task management. While it's designed with safety boundaries (tool allowlists, read-only defaults, human-as-approver), you are responsible for understanding what access you're granting and reviewing what the agent does with it.
 
@@ -112,8 +111,6 @@ A few things to keep in mind:
 - **Review tool allowlists carefully.** The proxy config (`mcp-proxy-config.json`) controls which MCP tools are exposed. Before starting the stack, verify you're comfortable with what's enabled - especially any write operations.
 - **Enterprise environments have rules.** If you're connecting to corporate systems (work email, company Slack, internal trackers), check with your IT and security teams first. Many organizations have policies about third-party tool access, API token usage, data handling, and AI tool adoption that may apply.
 - **AI output requires judgment.** The agent can misread context, misattribute information, or produce plausible-sounding errors. The human-as-approver model exists because human review is not optional - it's the safety mechanism.
-
-</details>
 
 <details>
 <summary><h2>Adapting to your role</h2></summary>
