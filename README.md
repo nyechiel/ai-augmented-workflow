@@ -6,6 +6,7 @@
 [![Platform: Linux | macOS | WSL2](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20WSL2-lightgrey.svg)](#platform-notes)
 [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet.svg)](https://www.anthropic.com/claude-code)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
+[![skillsaw grade](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnyechiel%2Fai-augmented-workflow%2Fmain%2F.skillsaw-badge.json)](https://skillsaw.org/)
 
 A template you clone, customize, and make your own. Built on [Claude Code](https://www.anthropic.com/claude-code) and [MCP](https://modelcontextprotocol.io/), but the architecture - skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent.
 
