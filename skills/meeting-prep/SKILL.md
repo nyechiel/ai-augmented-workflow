@@ -1,7 +1,7 @@
 ---
 name: meeting-prep
 description: Generate a pre-meeting brief with context discovery, commitment tracking, and talking points.
-argument-hint: [topic] [attendee1, attendee2, ...]
+argument-hint: "[topic] [attendee1, attendee2, ...]"
 allowed-tools:
   - mcp__google-workspace__get_events
   - mcp__google-workspace__search_gmail_messages
@@ -75,7 +75,7 @@ Save to `meetings/YYYY-MM-DD-<topic-slug>.md` using `templates/meeting-brief.md`
 
 ### 4. Present Summary
 
-After saving, present: key things to be aware of, outstanding commitments, and top 3 talking points.
+After saving, present: key context for this meeting, outstanding commitments, and top 3 talking points.
 
 ## Graceful Degradation
 

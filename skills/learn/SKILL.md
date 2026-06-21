@@ -18,7 +18,7 @@ Review the current conversation for corrections, extract generalizable rules, an
 ### 1. Identify Corrections
 
 Look for:
-- **Explicit corrections**: "No, don't do X" / "That's wrong, it should be Y"
+- **Explicit corrections**: "No, don't do X" / "That's wrong, it should be Y" - extract the rule and its positive alternative
 - **Implicit corrections**: User rewrites output, ignores a suggestion, or asks again with more specificity
 - **Positive confirmations**: "Yes, exactly like that" / acceptance of a non-obvious approach
 
