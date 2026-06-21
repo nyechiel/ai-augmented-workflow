@@ -17,6 +17,13 @@ jobs:
         with:
           globs: '**/*.md'
 
+  skillsaw:
+    name: Skillsaw lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: stbenjam/skillsaw@v0
+
   link-check:
     name: Link check
     runs-on: ubuntu-latest

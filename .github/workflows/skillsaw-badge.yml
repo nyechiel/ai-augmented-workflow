@@ -1,0 +1,25 @@
+name: Update skillsaw badge
+
+on:
+  push:
+    branches: [main]
+    paths: ['**/*.md', '.skillsaw.yaml', '.mcp.json', 'skills/**']
+
+permissions:
+  contents: write
+
+jobs:
+  badge:
+    name: Regenerate badge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - run: pip install skillsaw
+      - run: skillsaw badge || true
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Update skillsaw badge'
+          file_pattern: '.skillsaw-badge.json'
