@@ -7,6 +7,7 @@
 [![Built with Claude Code](https://img.shields.io/badge/Built%20with-Claude%20Code-blueviolet.svg)](https://www.anthropic.com/claude-code)
 [![MCP](https://img.shields.io/badge/MCP-Model%20Context%20Protocol-orange.svg)](https://modelcontextprotocol.io/)
 [![skillsaw grade](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnyechiel%2Fai-augmented-workflow%2Fmain%2F.skillsaw-badge.json)](https://skillsaw.org/)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Standard-green.svg)](https://agentskills.io/home)
 
 A template you clone, customize, and make your own. Built on [Claude Code](https://www.anthropic.com/claude-code) and [MCP](https://modelcontextprotocol.io/), but the architecture - skills as markdown, memory files, tool allowlists - is portable to any MCP-compatible agent.
 
@@ -164,7 +165,7 @@ Contributions are welcome - bug fixes, documentation improvements, setup and pla
 This project builds on ideas and tools from several people:
 
 - [Andrej Karpathy](https://karpathy.ai/) - His [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) concept (compiling raw data into structured, interlinked markdown rather than chunking it into vector embeddings) is the knowledge architecture pattern behind this workflow. His observations on LLM coding pitfalls, [codified by the community](https://github.com/multica-ai/andrej-karpathy-skills), also helped establish structured project instructions as a best practice.
-- [Anthropic](https://www.anthropic.com/) - Claude Code, the skills system, and the original creators of the [Model Context Protocol](https://modelcontextprotocol.io/), now an open standard under the [Linux Foundation's Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation).
+- [Anthropic](https://www.anthropic.com/) - Claude Code, the skills system, and the original creators of the [Model Context Protocol](https://modelcontextprotocol.io/), now an open standard under the [Linux Foundation's Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation). The skills in this repo follow the [Agent Skills](https://agentskills.io/home) open standard for defining reusable agent capabilities.
 - [TBXark](https://github.com/TBXark) - [mcp-proxy](https://github.com/TBXark/mcp-proxy), the gateway that makes tool allowlists possible - a key safety component.
 - [Boris Cherny](https://github.com/bcherny) - Creator of Claude Code. His [workflow tips](https://howborisusesclaudecode.com/) and approach to CLAUDE.md as a living team document were an early reference for structuring agent instructions.
 - [Jonathan Zarecki](https://github.com/jonzarecki) - His work on a similar AI-augmented workflow was a direct inspiration for this project.
