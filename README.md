@@ -76,6 +76,14 @@ The setup script installs Crux and App Dashboard, copies example configs, create
 
 See [docs/SETUP.md](docs/SETUP.md) for the full step-by-step guide.
 
+### Onboard with AI
+
+If you use an AI coding agent (Claude Code, Cursor, Codex, etc.), you can hand it the setup instead of following the steps manually:
+
+> Read docs/SETUP.md and walk me through the full setup. Run the setup script, help me customize CLAUDE.md for my role, and configure the MCP servers for my accounts.
+
+The repo is structured so that an agent can read the setup guide, run the scripts, and guide you through the parts that need your input (credentials, role customization, MCP server selection). It's the fastest path from clone to working system.
+
 ## Included skills
 
 These are starter skills to get you up and running. They cover common knowledge worker workflows, but the real value comes from building your own for whatever you repeat. A skill is just a markdown file with instructions - if you can explain it to a person, you can encode it as a skill.
